@@ -2,12 +2,10 @@ import exception.ParkingLotCapacityExceededException
 import model.ParkingSpot
 import model.VehicleType
 
-class ParkingSpotRepository {
+class ParkingSpotRepository(parkingSpotCapacity: Map<VehicleType, Int>) {
     private val spots = mutableMapOf<VehicleType, ArrayList<ParkingSpot>>()
 
-    fun initialize(parkingSpotCapacity: Map<VehicleType, Int>):
-            MutableMap<VehicleType, ArrayList<ParkingSpot>> {
-
+    init {
         for (entry in parkingSpotCapacity.entries.iterator()) {
             spots[entry.key] = arrayListOf()
 
@@ -15,8 +13,8 @@ class ParkingSpotRepository {
                 spots[entry.key]?.add(ParkingSpot(i))
             }
         }
-        return spots
     }
+
     fun getNextAvailableSpot(vehicleType: VehicleType): ParkingSpot {
         for (spot in spots[vehicleType]!!) {
             if (spot.isEmpty())

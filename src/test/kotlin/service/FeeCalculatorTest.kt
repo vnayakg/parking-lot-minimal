@@ -1,6 +1,7 @@
-package model
+package service
 
 import exception.InvalidTimeDurationException
+import model.VehicleType
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 

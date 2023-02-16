@@ -1,7 +1,9 @@
-package model
+package service
 
 import exception.InvalidTimeDurationException
 import exception.InvalidVehicleTypeException
+import model.FeeScheme
+import model.VehicleType
 
 class FeeCalculator : FeeScheme {
     private val perHourFee = 10

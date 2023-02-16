@@ -1,6 +1,6 @@
 package model
 
-class Spot(private val spotNumber: Int, private var isEmpty: Boolean = true) {
+class ParkingSpot(private val spotNumber: Int, private var isEmpty: Boolean = true) {
     private var vehicle: Vehicle? = null
     fun getParkedVehicle(): Vehicle? {
         return vehicle

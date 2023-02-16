@@ -13,4 +13,14 @@ class ParkingSpotRepositoryTest {
         assertEquals(spots[VehicleType.CAR]?.size, 100)
     }
 
+    @Test
+    fun `should be able to find next available spot`() {
+        val vehicleSpotCapacity = mapOf(VehicleType.CAR to 100)
+        val parkingSpotRepository = ParkingSpotRepository()
+        parkingSpotRepository.initialize(vehicleSpotCapacity)
+
+        val nextAvailableSpot = parkingSpotRepository.getNextAvailableSpot(VehicleType.CAR)
+
+        assertEquals(1, nextAvailableSpot.getSpotNumber())
+    }
 }

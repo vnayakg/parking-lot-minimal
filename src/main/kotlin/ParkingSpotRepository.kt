@@ -1,3 +1,4 @@
+import exception.ParkingLotCapacityExceededException
 import model.ParkingSpot
 import model.VehicleType
 
@@ -15,5 +16,12 @@ class ParkingSpotRepository {
             }
         }
         return spots
+    }
+    fun getNextAvailableSpot(vehicleType: VehicleType): ParkingSpot {
+        for (spot in spots[vehicleType]!!) {
+            if (spot.isEmpty())
+                return spot
+        }
+        throw ParkingLotCapacityExceededException("No available slot for $vehicleType")
     }
 }

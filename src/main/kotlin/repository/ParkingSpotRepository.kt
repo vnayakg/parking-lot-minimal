@@ -1,3 +1,6 @@
+package repository
+
+import exception.InvalidVehicleNumberException
 import exception.ParkingLotCapacityExceededException
 import model.ParkingSpot
 import model.VehicleType
@@ -21,5 +24,18 @@ class ParkingSpotRepository(parkingSpotCapacity: Map<VehicleType, Int>) {
                 return spot
         }
         throw ParkingLotCapacityExceededException("No available slot for $vehicleType")
+    }
+
+    fun getSpotByVehicleNumber(vehicleType: VehicleType, vehicleNumber: String): ParkingSpot {
+        for (spot in spots[vehicleType]!!) {
+            val parkedVehicle = spot.getParkedVehicle()
+
+            if (parkedVehicle != null
+                && parkedVehicle.getVehicleLicenseNumber() == vehicleNumber
+            ) {
+                return spot
+            }
+        }
+        throw InvalidVehicleNumberException("$vehicleNumber is invalid")
     }
 }

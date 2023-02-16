@@ -12,8 +12,7 @@ class ReceiptTest {
         val exitDateTime = Date(entryDateTime.time + milliSecondsInHour)
 
         val receipt = Receipt(
-            1,
-            "MH 12 AB 1234",
+            "ABC123",
             entryDateTime,
             exitDateTime,
             10.0F
@@ -22,7 +21,7 @@ class ReceiptTest {
         val expectedReceiptOutput =
             """
             Receipt\n
-            Receipt Number: 1\n
+            Receipt Number: ABC123\n
             Entry Date-time: $entryDateTime\n
             Exit Date-time: $exitDateTime\n
             Fees: 10.0

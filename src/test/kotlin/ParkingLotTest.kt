@@ -5,9 +5,11 @@ import org.junit.jupiter.api.Test
 import java.util.*
 
 class ParkingLotTest {
+    private val vehicleSpotCapacity = mapOf(VehicleType.CAR to 100)
+    private val parkingSpotRepository = ParkingSpotRepository(vehicleSpotCapacity)
+    private val parkingLot = ParkingLot(parkingSpotRepository)
     @Test
     fun `it should park vehicle`() {
-        val parkingLot = ParkingLot()
         val vehicle = Vehicle(VehicleType.CAR, "MH 12 AB 1234")
         val issueDateTime = Date()
         val ticket = parkingLot.park(vehicle, issueDateTime)

@@ -3,7 +3,7 @@ package model
 import java.util.*
 
 class Ticket(
-    private val ticketNumber: Int,
+    private val ticketNumber: String,
     private val vehicle: Vehicle,
     private val spotNumber: Int,
     private val issueDateTime: Date,
@@ -31,7 +31,4 @@ class Ticket(
         return issueDateTime
     }
 
-    fun getSpotNumber(): Int {
-        return spotNumber
-    }
 }

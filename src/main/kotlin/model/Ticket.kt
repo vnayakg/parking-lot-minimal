@@ -10,12 +10,10 @@ class Ticket(
 ) {
     override fun toString(): String {
         return """
-            ""${'"'}
-            Ticket\n
-            TicketNumber: $ticketNumber\n
-            Spot Number: $spotNumber\n
+            Ticket
+            TicketNumber: $ticketNumber
+            Spot Number: $spotNumber
             Entry DateTime: $issueDateTime
-            ""${'"'}
             """.trimIndent()
     }
 

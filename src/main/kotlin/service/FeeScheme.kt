@@ -4,5 +4,5 @@ import model.VehicleType
 import java.util.*
 
 interface FeeScheme {
-    fun calculateFee(startEndTime: Date, exitDateTime: Date, vehicleType: VehicleType): Float
+    fun calculateFee(entryDateTime: Date, exitDateTime: Date, vehicleType: VehicleType): Float
 }

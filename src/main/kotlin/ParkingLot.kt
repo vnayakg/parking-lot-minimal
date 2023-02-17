@@ -1,5 +1,6 @@
 import model.*
 import repository.ParkingSpotRepository
+import service.FeeScheme
 import java.util.Date
 import java.util.UUID
 
@@ -11,8 +12,7 @@ class ParkingLot(
     fun park(vehicle: Vehicle, currentDateTime: Date): Ticket {
         val vehicleType = vehicle.getVehicleType()
 
-        val nextAvailableParkingSpot =
-            parkingSpotRepository.getNextAvailableSpot(vehicleType)
+        val nextAvailableParkingSpot = parkingSpotRepository.getNextAvailableSpot(vehicleType)
 
         nextAvailableParkingSpot.allocateSlot(vehicle)
 
@@ -32,8 +32,11 @@ class ParkingLot(
 
         spot.vacateSlot()
 
-        val parkHours = calculateParkHours(ticket.getIssueDateTime(), exitDateTime)
-        val parkingFee = feeCalculator.calculateFee(parkHours, ticket.getVehicleType())
+        val parkingFee = feeCalculator.calculateFee(
+            ticket.getIssueDateTime(),
+            exitDateTime,
+            ticket.getVehicleType()
+        )
 
         return Receipt(
             UUID.randomUUID().toString(),
@@ -41,13 +44,6 @@ class ParkingLot(
             exitDateTime,
             parkingFee
         )
-    }
-
-    private fun calculateParkHours(issueDateTime: Date, exitDateTime: Date): Float {
-        val timeDifferenceInMilliSeconds = exitDateTime.time - issueDateTime.time
-        val milliSecondsPerHour = 1000f * 60f * 60f
-
-        return timeDifferenceInMilliSeconds / milliSecondsPerHour
     }
 
 }

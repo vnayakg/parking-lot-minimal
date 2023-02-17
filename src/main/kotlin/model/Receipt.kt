@@ -15,10 +15,10 @@ class Receipt(
 
     override fun toString(): String {
         return """
-            Receipt\n
-            Receipt Number: $receiptNumber\n
-            Entry Date-time: $entryDateTime\n
-            Exit Date-time: $exitDateTime\n
+            Receipt
+            Receipt Number: $receiptNumber
+            Entry Date-time: $entryDateTime
+            Exit Date-time: $exitDateTime
             Fees: $fee
             """.trimIndent()
     }

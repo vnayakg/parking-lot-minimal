@@ -4,25 +4,32 @@ import exception.InvalidTimeDurationException
 import model.VehicleType
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import java.util.*
 
 class FeeCalculatorTest {
     @Test
     fun `it should calculate fee`() {
+        val entryDateTime = Date()
+        val milliSecondsInHour = 3600000
+        val exitDateTime = Date(entryDateTime.time + milliSecondsInHour)
         val feeCalculator = FeeCalculator()
 
-        val actualFee = feeCalculator.calculateFee(2.5F, VehicleType.CAR)
+        val actualFee = feeCalculator.calculateFee(entryDateTime, exitDateTime, VehicleType.CAR)
 
-        assertEquals(25F, actualFee)
+        assertEquals(10F, actualFee)
     }
 
     @Test
     fun `it should give throw exception for non-positive park duration`() {
+        val entryDateTime = Date()
+        val milliSecondsInHour = 3600000
+        val exitDateTime = Date(entryDateTime.time + milliSecondsInHour)
         val feeCalculator = FeeCalculator()
 
         assertThrows(
             InvalidTimeDurationException::class.java
         ) {
-            feeCalculator.calculateFee(-2.5F, VehicleType.CAR)
+            feeCalculator.calculateFee(exitDateTime, entryDateTime, VehicleType.CAR)
         }
     }
 }

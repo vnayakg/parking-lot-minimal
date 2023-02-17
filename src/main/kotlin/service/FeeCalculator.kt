@@ -7,13 +7,12 @@ import model.VehicleType
 import java.util.*
 
 class FeeCalculator : FeeScheme {
-    private val perHourFee = Constant.PARK_FEE_CAR
     override fun calculateFee(entryDateTime: Date, exitDateTime: Date, vehicleType: VehicleType): Float {
         val parkDurationInHours = calculateTimeDurationInHours(entryDateTime, exitDateTime)
         if (parkDurationInHours <= 0) throw InvalidTimeDurationException("Park duration in hours should be positive")
 
         when (vehicleType) {
-            VehicleType.CAR -> return perHourFee * parkDurationInHours
+            VehicleType.CAR -> return Constant.PARK_FEE_CAR * parkDurationInHours
             else -> throw InvalidVehicleTypeException("Vehicle type is invalid")
         }
     }

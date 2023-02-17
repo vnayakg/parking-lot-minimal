@@ -8,7 +8,7 @@ import java.util.*
 class FeeCalculator : FeeScheme {
     private val perHourFee = 10
     override fun calculateFee(entryDateTime: Date, exitDateTime: Date, vehicleType: VehicleType): Float {
-        val parkDurationInHours = calculateParkHours(entryDateTime, exitDateTime)
+        val parkDurationInHours = calculateTimeDurationInHours(entryDateTime, exitDateTime)
         if (parkDurationInHours <= 0) throw InvalidTimeDurationException("Park duration in hours should be positive")
 
         when (vehicleType) {
@@ -17,8 +17,8 @@ class FeeCalculator : FeeScheme {
         }
     }
 
-    private fun calculateParkHours(issueDateTime: Date, exitDateTime: Date): Float {
-        val timeDifferenceInMilliSeconds = exitDateTime.time - issueDateTime.time
+    private fun calculateTimeDurationInHours(startDateTime: Date, endDateTime: Date): Float {
+        val timeDifferenceInMilliSeconds = endDateTime.time - startDateTime.time
         val milliSecondsPerHour = 1000f * 60f * 60f
 
         return timeDifferenceInMilliSeconds / milliSecondsPerHour

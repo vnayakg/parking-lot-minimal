@@ -14,12 +14,10 @@ class TicketTest {
         val expectedTicketInformation = ticket.toString()
 
         val actualTicketInformation = """
-            ""${'"'}
-            Ticket\n
-            TicketNumber: ABC123\n
-            Spot Number: 1\n
+            Ticket
+            TicketNumber: ABC123
+            Spot Number: 1
             Entry DateTime: $issueDateTime
-            ""${'"'}
         """.trimIndent()
 
         assertEquals(expectedTicketInformation, actualTicketInformation)

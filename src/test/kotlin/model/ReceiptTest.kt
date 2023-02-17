@@ -20,10 +20,10 @@ class ReceiptTest {
         val actualReceiptOutput = receipt.toString()
         val expectedReceiptOutput =
             """
-            Receipt\n
-            Receipt Number: ABC123\n
-            Entry Date-time: $entryDateTime\n
-            Exit Date-time: $exitDateTime\n
+            Receipt
+            Receipt Number: ABC123
+            Entry Date-time: $entryDateTime
+            Exit Date-time: $exitDateTime
             Fees: 10.0
             """.trimIndent()
 

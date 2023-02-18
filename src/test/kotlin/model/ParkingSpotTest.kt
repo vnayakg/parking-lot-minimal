@@ -7,7 +7,7 @@ class ParkingSpotTest {
     @Test
     fun `it should allocate parking spot`() {
         val vehicle = Vehicle(VehicleType.CAR, "MH 12 AB 1234")
-        val parkingSpot = ParkingSpot(1)
+        val parkingSpot = ParkingSpot(1, VehicleType.CAR)
 
         parkingSpot.allocateSlot(vehicle)
 
@@ -18,7 +18,7 @@ class ParkingSpotTest {
     @Test
     fun `it should vacate the parking spot`() {
         val vehicle = Vehicle(VehicleType.CAR, "MH 12 AB 1234")
-        val parkingSpot = ParkingSpot(1)
+        val parkingSpot = ParkingSpot(1, VehicleType.CAR)
         parkingSpot.allocateSlot(vehicle)
 
         parkingSpot.vacateSlot()

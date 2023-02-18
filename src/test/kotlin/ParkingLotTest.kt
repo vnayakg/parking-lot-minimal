@@ -6,20 +6,21 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import repository.ParkingSpotList
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ParkingLotTest {
     private val vehicleSpotCapacity = mapOf(VehicleType.CAR to 100)
-    private val spotList = getParkingSpotList()
+    private val spotList = getParkingSpotList(vehicleSpotCapacity)
     private val parkingSpotList = ParkingSpotList(spotList)
     private val feeCalculator = FeeCalculator()
     private val parkingLot = ParkingLot(parkingSpotList, feeCalculator)
 
-    private fun getParkingSpotList(): List<ParkingSpot> {
+    private fun getParkingSpotList(vehicleSpotCapacity: Map<VehicleType, Int>): ArrayList<ParkingSpot> {
         val spots = arrayListOf<ParkingSpot>()
 
         for (entry in vehicleSpotCapacity.entries.iterator()) {
             for (i in 1..entry.value) {
-                spots.add(ParkingSpot(i))
+                spots.add(ParkingSpot(i, entry.key))
             }
         }
         return spots

@@ -17,7 +17,7 @@ class ParkingSpotList(private val spots: List<ParkingSpot>) {
     }
 
 
-    fun getSpotByVehicleNumber(vehicleType: VehicleType, vehicleNumber: String): ParkingSpot {
+    fun getSpotByVehicleNumber(vehicleNumber: String): ParkingSpot {
         for (spot in spots) {
             val parkedVehicle = spot.getParkedVehicle()
 

@@ -9,8 +9,9 @@ class TicketTest {
     fun `should get ticket information`() {
         val vehicle = Vehicle(VehicleType.CAR, "MH 12 AB 1234")
         val issueDateTime = Date()
+        val spot = ParkingSpot(1)
 
-        val ticket = Ticket("ABC123", vehicle, 1, issueDateTime)
+        val ticket = Ticket("ABC123", vehicle, spot, issueDateTime)
         val expectedTicketInformation = ticket.toString()
 
         val actualTicketInformation = """

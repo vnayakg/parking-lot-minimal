@@ -5,14 +5,14 @@ import java.util.*
 class Ticket(
     private val ticketNumber: String,
     private val vehicle: Vehicle,
-    private val spotNumber: Int,
+    private val assignedSpot: ParkingSpot,
     private val issueDateTime: Date,
 ) {
     override fun toString(): String {
         return """
             Ticket
             TicketNumber: $ticketNumber
-            Spot Number: $spotNumber
+            Spot Number: ${assignedSpot.getSpotNumber()}
             Entry DateTime: $issueDateTime
             """.trimIndent()
     }

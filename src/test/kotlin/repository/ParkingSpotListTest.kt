@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
 class ParkingSpotListTest {
-    private fun getParkingSpotList(vehicleSpotCapacity: Map<VehicleType, Int>): List<ParkingSpot> {
+    private fun getParkingSpotList(vehicleSpotCapacity: Map<VehicleType, Int>): ArrayList<ParkingSpot> {
         val spots = arrayListOf<ParkingSpot>()
 
         for (entry in vehicleSpotCapacity.entries.iterator()) {
             for (i in 1..entry.value) {
-                spots.add(ParkingSpot(i))
+                spots.add(ParkingSpot(i, entry.key))
             }
         }
         return spots

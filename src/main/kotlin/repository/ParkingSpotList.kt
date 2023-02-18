@@ -5,13 +5,14 @@ import exception.ParkingLotCapacityExceededException
 import model.ParkingSpot
 import model.VehicleType
 
-class ParkingSpotList(private val spots: List<ParkingSpot>) {
+class ParkingSpotList(private val spots: ArrayList<ParkingSpot>) {
     fun getNextAvailableSpot(vehicleType: VehicleType): ParkingSpot {
-        //return spots.first { spot -> spot.getVehicleType() == vehicleType }
 
         for (spot in spots) {
-            if (spot.isEmpty())
+            if (spot.getVehicleType() == vehicleType) {
+                spots.remove(spot)
                 return spot
+            }
         }
         throw ParkingLotCapacityExceededException("No available slot for $vehicleType")
     }

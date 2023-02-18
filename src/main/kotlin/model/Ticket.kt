@@ -29,4 +29,8 @@ class Ticket(
         return issueDateTime
     }
 
+    fun getAssignedSpot(): ParkingSpot {
+        return assignedSpot
+    }
+
 }

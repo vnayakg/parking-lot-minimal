@@ -26,7 +26,6 @@ class ParkingLot(
 
     fun unPark(ticket: Ticket, exitDateTime: Date): Receipt {
         val spot = parkingSpotList.getSpotByVehicleNumber(
-            ticket.getVehicleType(),
             ticket.getVehicleLicenseNumber()
         )
 

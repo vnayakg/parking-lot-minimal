@@ -19,7 +19,7 @@ class ParkingLot(
         return Ticket(
             UUID.randomUUID().toString(),
             vehicle,
-            nextAvailableParkingSpot.getSpotNumber(),
+            nextAvailableParkingSpot,
             currentDateTime
         )
     }

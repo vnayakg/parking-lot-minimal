@@ -1,6 +1,6 @@
 import model.*
 import repository.ParkingSpotList
-import service.FeeScheme
+import calculator.FeeScheme
 import java.util.Date
 import java.util.UUID
 
@@ -14,8 +14,6 @@ class ParkingLot(
 
         val nextAvailableParkingSpot = parkingSpotList.getNextAvailableSpot(vehicleType)
 
-        //nextAvailableParkingSpot.allocateSlot(vehicle)
-
         return Ticket(
             UUID.randomUUID().toString(),
             vehicle,
@@ -28,8 +26,6 @@ class ParkingLot(
         val spot = ticket.getAssignedSpot()
 
         parkingSpotList.vacateSpot(spot)
-
-        //spot.vacateSlot()
 
         val parkingFee = feeCalculator.calculateFee(
             ticket.getIssueDateTime(),

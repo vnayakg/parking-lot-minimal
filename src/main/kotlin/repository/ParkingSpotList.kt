@@ -14,6 +14,8 @@ class ParkingSpotList(private val availableSpots: ArrayList<ParkingSpot>) {
     }
 
     fun vacateSpot(spot: ParkingSpot) {
-        availableSpots.add(spot)
+        if(!availableSpots.contains(spot)){
+            availableSpots.add(spot)
+        }
     }
 }

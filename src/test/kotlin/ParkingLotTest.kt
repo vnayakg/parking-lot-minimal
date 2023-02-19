@@ -13,7 +13,8 @@ class ParkingLotTest {
     private val spotList = getParkingSpotList(vehicleSpotCapacity)
     private val parkingSpotList = ParkingSpotList(spotList)
     private val feeCalculator = FeeCalculator()
-    private val parkingLot = ParkingLot(parkingSpotList, feeCalculator)
+    private val idGenerator = IDGenerator()
+    private val parkingLot = ParkingLot(parkingSpotList, feeCalculator, idGenerator)
 
     private fun getParkingSpotList(vehicleSpotCapacity: Map<VehicleType, Int>): ArrayList<ParkingSpot> {
         val spots = arrayListOf<ParkingSpot>()

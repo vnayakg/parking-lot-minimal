@@ -1,12 +1,14 @@
-import model.*
-import repository.ParkingSpotList
 import calculator.FeeScheme
-import java.util.Date
-import java.util.UUID
+import model.Receipt
+import model.Ticket
+import model.Vehicle
+import repository.ParkingSpotList
+import java.util.*
 
 class ParkingLot(
     private val parkingSpotList: ParkingSpotList,
-    private val feeCalculator: FeeScheme
+    private val feeCalculator: FeeScheme,
+    private val idGenerator: IDGenerator
 ) {
 
     fun park(vehicle: Vehicle, currentDateTime: Date): Ticket {
@@ -15,7 +17,7 @@ class ParkingLot(
         val nextAvailableParkingSpot = parkingSpotList.getNextAvailableSpot(vehicleType)
 
         return Ticket(
-            UUID.randomUUID().toString(),
+            idGenerator.generateTicketID(),
             vehicle,
             nextAvailableParkingSpot,
             currentDateTime
@@ -34,7 +36,7 @@ class ParkingLot(
         )
 
         return Receipt(
-            UUID.randomUUID().toString(),
+            idGenerator.generateReceiptID(),
             ticket.getIssueDateTime(),
             exitDateTime,
             parkingFee

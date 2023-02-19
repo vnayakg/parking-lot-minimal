@@ -3,8 +3,7 @@ package repository
 import exception.ParkingLotCapacityExceededException
 import model.ParkingSpot
 import model.VehicleType
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 class ParkingSpotListTest {
@@ -42,5 +41,17 @@ class ParkingSpotListTest {
             parkingSpotList.getNextAvailableSpot(VehicleType.CAR)
 
         }
+    }
+
+    @Test
+    fun `should vacate spot`() {
+        val vehicleSpotCapacity = mapOf(VehicleType.CAR to 100)
+        val spotList = getParkingSpotList(vehicleSpotCapacity)
+        val parkingSpotList = ParkingSpotList(spotList)
+
+        val nextAvailableSpot = parkingSpotList.getNextAvailableSpot(VehicleType.CAR)
+        parkingSpotList.vacateSpot(nextAvailableSpot)
+
+        assertTrue(spotList.contains(nextAvailableSpot))
     }
 }

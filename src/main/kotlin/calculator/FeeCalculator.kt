@@ -1,4 +1,4 @@
-package service
+package calculator
 
 import Constant
 import exception.InvalidTimeDurationException
@@ -9,7 +9,9 @@ import java.util.*
 class FeeCalculator : FeeScheme {
     override fun calculateFee(entryDateTime: Date, exitDateTime: Date, vehicleType: VehicleType): Float {
         val parkDurationInHours = calculateTimeDurationInHours(entryDateTime, exitDateTime)
-        if (parkDurationInHours <= 0) throw InvalidTimeDurationException("Park duration in hours should be positive")
+        if (parkDurationInHours <= 0) {
+            throw InvalidTimeDurationException("Park duration in hours should be positive")
+        }
 
         when (vehicleType) {
             VehicleType.CAR -> return Constant.PARK_FEE_CAR * parkDurationInHours

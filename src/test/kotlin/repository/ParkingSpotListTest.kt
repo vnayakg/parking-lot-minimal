@@ -44,7 +44,7 @@ class ParkingSpotListTest {
     }
 
     @Test
-    fun `should vacate spot`() {
+    fun `should vacate a spot`() {
         val vehicleSpotCapacity = mapOf(VehicleType.CAR to 100)
         val spotList = getParkingSpotList(vehicleSpotCapacity)
         val parkingSpotList = ParkingSpotList(spotList)
@@ -53,5 +53,21 @@ class ParkingSpotListTest {
         parkingSpotList.vacateSpot(nextAvailableSpot)
 
         assertTrue(spotList.contains(nextAvailableSpot))
+    }
+
+    @Test
+    fun `should be able to get available spot if there are multiple vehicle types`() {
+        val vehicleSpotCapacity = mapOf(
+            VehicleType.CAR to 100,
+            VehicleType.SCOOTER to 50
+        )
+        val spotList = getParkingSpotList(vehicleSpotCapacity)
+        val parkingSpotList = ParkingSpotList(spotList)
+
+        val scooterSpot = parkingSpotList.getNextAvailableSpot(VehicleType.SCOOTER)
+        val carSpot = parkingSpotList.getNextAvailableSpot(VehicleType.CAR)
+
+        assertEquals(VehicleType.SCOOTER, scooterSpot.getVehicleType())
+        assertEquals(VehicleType.CAR, carSpot.getVehicleType())
     }
 }

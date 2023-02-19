@@ -17,7 +17,7 @@ class ReceiptTest {
             exitDateTime,
             10.0F
         )
-        val actualReceiptOutput = receipt.toString()
+        val actualReceiptOutput = receipt.getReceiptInformationString()
         val expectedReceiptOutput =
             """
             Receipt

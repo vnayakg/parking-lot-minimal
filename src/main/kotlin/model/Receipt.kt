@@ -13,7 +13,7 @@ class Receipt(
         return fee
     }
 
-    override fun toString(): String {
+    fun getReceiptInformationString(): String {
         return """
             Receipt
             Receipt Number: $receiptNumber

@@ -8,14 +8,6 @@ class Ticket(
     private val assignedSpot: ParkingSpot,
     private val issueDateTime: Date,
 ) {
-    override fun toString(): String {
-        return """
-            Ticket
-            TicketNumber: $ticketNumber
-            Spot Number: ${assignedSpot.getSpotNumber()}
-            Entry DateTime: $issueDateTime
-            """.trimIndent()
-    }
 
     fun getVehicleLicenseNumber(): String {
         return vehicle.getVehicleLicenseNumber()
@@ -31,6 +23,15 @@ class Ticket(
 
     fun getAssignedSpot(): ParkingSpot {
         return assignedSpot
+    }
+
+    fun getTicketInformationString(): String {
+        return """
+            Ticket
+            TicketNumber: $ticketNumber
+            Spot Number: ${assignedSpot.getSpotNumber()}
+            Entry DateTime: $issueDateTime
+            """.trimIndent()
     }
 
 }

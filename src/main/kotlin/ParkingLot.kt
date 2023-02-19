@@ -11,7 +11,7 @@ class ParkingLot(
     private val idGenerator: IDGenerator
 ) {
 
-    fun park(vehicle: Vehicle, currentDateTime: Date): Ticket {
+    fun park(vehicle: Vehicle, entryDateTime: Date): Ticket {
         val vehicleType = vehicle.getVehicleType()
 
         val nextAvailableParkingSpot = parkingSpotList.getNextAvailableSpot(vehicleType)
@@ -20,7 +20,7 @@ class ParkingLot(
             idGenerator.generateTicketID(),
             vehicle,
             nextAvailableParkingSpot,
-            currentDateTime
+            entryDateTime
         )
     }
 

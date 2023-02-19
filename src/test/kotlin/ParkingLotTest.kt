@@ -1,5 +1,5 @@
 import model.ParkingSpot
-import service.FeeCalculator
+import calculator.FeeCalculator
 import model.Vehicle
 import model.VehicleType
 import org.junit.jupiter.api.Assertions.*

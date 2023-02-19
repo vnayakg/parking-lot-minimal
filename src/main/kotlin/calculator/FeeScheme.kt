@@ -1,4 +1,4 @@
-package service
+package calculator
 
 import model.VehicleType
 import java.util.*

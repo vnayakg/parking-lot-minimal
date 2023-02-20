@@ -3,7 +3,7 @@ package model
 import exception.ParkingLotCapacityExceededException
 import java.util.ArrayList
 
-class Floor(private val availableSpots: ArrayList<ParkingSpot>) {
+class Floor(private val floorNumber: Int, private val availableSpots: ArrayList<ParkingSpot>) {
     fun getNextAvailableSpot(vehicleType: VehicleType): ParkingSpot {
         try {
             return availableSpots.first { spot -> spot.getVehicleType() == vehicleType }
@@ -17,5 +17,9 @@ class Floor(private val availableSpots: ArrayList<ParkingSpot>) {
         if(!availableSpots.contains(spot)){
             availableSpots.add(spot)
         }
+    }
+
+    fun getFloorNumber(): Int {
+        return floorNumber
     }
 }

@@ -17,6 +17,7 @@ class TicketTest {
         val actualTicketInformation = """
             Ticket
             TicketNumber: ABC123
+            Floor Number: 1
             Spot Number: 1
             Entry DateTime: $issueDateTime
         """.trimIndent()

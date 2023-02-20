@@ -29,6 +29,7 @@ class Ticket(
         return """
             Ticket
             TicketNumber: $ticketNumber
+            Floor Number: ${assignedSpot.getFloorNumber()}
             Spot Number: ${assignedSpot.getSpotNumber()}
             Entry DateTime: $issueDateTime
             """.trimIndent()

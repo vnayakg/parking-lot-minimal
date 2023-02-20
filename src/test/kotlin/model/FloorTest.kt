@@ -39,20 +39,21 @@ class FloorTest {
         val floorList = getParkingFloorList(3)
         val parkingFloorList = ParkingFloorList(floorList)
 
-        val nextAvailableSpot = parkingFloorList.getNextAvailableSpot(VehicleType.CAR)
+        val availableFloor = parkingFloorList.getAvailableFloor()
+        val nextAvailableSpot = availableFloor.getNextAvailableSpot(VehicleType.CAR)
 
         assertEquals(1, nextAvailableSpot.getSpotNumber())
     }
 
     @Test
-    fun `should throw exception if spot is not available`() {
+    fun `should throw exception if floor is not available`() {
         val floorList = getParkingFloorList(0)
         val parkingFloorList = ParkingFloorList(floorList)
 
         assertThrows(
             ParkingLotCapacityExceededException::class.java
         ) {
-            parkingFloorList.getNextAvailableSpot(VehicleType.CAR)
+            parkingFloorList.getAvailableFloor()
 
         }
     }

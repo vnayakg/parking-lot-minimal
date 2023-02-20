@@ -1,55 +1,59 @@
 package model
 
-import IDGenerator
-import ParkingLot
-import calculator.FeeCalculator
-import org.junit.jupiter.api.Assertions.*
+import exception.ParkingLotCapacityExceededException
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
-import repository.ParkingSpotList
-import java.util.*
-import kotlin.collections.ArrayList
+import repository.ParkingFloorList
 
-class FloorTest{
-    private val vehicleSpotCapacity = mapOf(VehicleType.CAR to 100)
-    private val spotList = getParkingSpotList(vehicleSpotCapacity)
-    private val parkingSpotList = ParkingSpotList(spotList)
-    private val feeCalculator = FeeCalculator()
-    private val idGenerator = IDGenerator()
-    private val parkingLot = ParkingLot(parkingSpotList, feeCalculator, idGenerator)
+class FloorTest {
 
-    private fun getParkingSpotList(vehicleSpotCapacity: Map<VehicleType, Int>): ArrayList<ParkingSpot> {
+    private fun getParkingFloorList(floorCount: Int): ArrayList<Floor> {
+        val floorList = arrayListOf<Floor>()
+
+        for (floorNumber in 1..floorCount) {
+            val availableSpotList = getParkingSpotList(mapOf(VehicleType.CAR to 50), floorNumber)
+            val floor = Floor(floorNumber, availableSpotList)
+
+            floorList.add(floor)
+        }
+        return floorList
+    }
+
+    private fun getParkingSpotList(
+        vehicleSpotCapacity: Map<VehicleType, Int>,
+        floorNumber: Int
+    ): ArrayList<ParkingSpot> {
         val spots = arrayListOf<ParkingSpot>()
 
         for (entry in vehicleSpotCapacity.entries.iterator()) {
             for (i in 1..entry.value) {
-                spots.add(ParkingSpot(i, entry.key))
+                spots.add(ParkingSpot(i, entry.key, floorNumber))
             }
         }
         return spots
     }
 
     @Test
-    fun `it should park vehicle`() {
-        val vehicle = Vehicle(VehicleType.CAR, "MH 12 AB 1234")
-        val issueDateTime = Date()
-        val ticket = parkingLot.park(vehicle, issueDateTime)
+    fun `should be able to find next available spot`() {
+        val floorList = getParkingFloorList(3)
+        val parkingFloorList = ParkingFloorList(floorList)
 
-        assertEquals("MH 12 AB 1234", ticket.getVehicleLicenseNumber())
-        assertEquals(issueDateTime, ticket.getIssueDateTime())
+        val nextAvailableSpot = parkingFloorList.getNextAvailableSpot(VehicleType.CAR)
+
+        assertEquals(1, nextAvailableSpot.getSpotNumber())
     }
 
     @Test
-    fun `it should un park vehicle`() {
-        val vehicle = Vehicle(VehicleType.CAR, "MH 12 AB 1234")
-        val entryDateTime = Date()
-        val milliSecondsInHour = 3600000
-        val exitDateTime = Date(entryDateTime.time + milliSecondsInHour)
-        val ticket = parkingLot.park(vehicle, entryDateTime)
+    fun `should throw exception if spot is not available`() {
+        val floorList = getParkingFloorList(0)
+        val parkingFloorList = ParkingFloorList(floorList)
 
-        val receipt = parkingLot.unPark(ticket, exitDateTime)
+        assertThrows(
+            ParkingLotCapacityExceededException::class.java
+        ) {
+            parkingFloorList.getNextAvailableSpot(VehicleType.CAR)
 
-        assertEquals("MH 12 AB 1234", ticket.getVehicleLicenseNumber())
-        assertEquals(entryDateTime, ticket.getIssueDateTime())
-        assertEquals(10.0F, receipt.getFee())
+        }
     }
 }

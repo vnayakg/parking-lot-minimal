@@ -12,7 +12,7 @@ class ParkingSpotListTest {
 
         for (entry in vehicleSpotCapacity.entries.iterator()) {
             for (i in 1..entry.value) {
-                spots.add(ParkingSpot(i, entry.key))
+                spots.add(ParkingSpot(i, entry.key, 1))
             }
         }
         return spots

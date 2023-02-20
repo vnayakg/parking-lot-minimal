@@ -22,4 +22,8 @@ class Floor(private val floorNumber: Int, private val availableSpots: ArrayList<
     fun getFloorNumber(): Int {
         return floorNumber
     }
+
+    fun isSpotAvailable(): Boolean {
+        return availableSpots.isNotEmpty()
+    }
 }

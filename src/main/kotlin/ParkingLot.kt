@@ -14,7 +14,8 @@ class ParkingLot(
     fun park(vehicle: Vehicle, entryDateTime: Date): Ticket {
         val vehicleType = vehicle.getVehicleType()
 
-        val nextAvailableParkingSpot = parkingFloorList.getNextAvailableSpot(vehicleType)
+        val availableFloor = parkingFloorList.getAvailableFloor()
+        val nextAvailableParkingSpot = availableFloor.getNextAvailableSpot(vehicleType)
 
         return Ticket(
             idGenerator.generateTicketID(),
@@ -27,7 +28,8 @@ class ParkingLot(
     fun unPark(ticket: Ticket, exitDateTime: Date): Receipt {
         val spot = ticket.getAssignedSpot()
 
-        parkingFloorList.vacateSpot(spot)
+        val floor = parkingFloorList.getFloorByFloorNumber(spot.getFloorNumber())
+        floor.vacateSpot(spot)
 
         val parkingFee = feeCalculator.calculateFee(
             ticket.getIssueDateTime(),

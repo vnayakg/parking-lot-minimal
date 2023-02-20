@@ -1,27 +1,42 @@
-import model.ParkingSpot
 import calculator.FeeCalculator
+import model.Floor
+import model.ParkingSpot
 import model.Vehicle
 import model.VehicleType
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import repository.ParkingSpotList
+import repository.ParkingFloorList
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ParkingLotTest {
     private val vehicleSpotCapacity = mapOf(VehicleType.CAR to 100)
-    private val spotList = getParkingSpotList(vehicleSpotCapacity)
-    private val parkingSpotList = ParkingSpotList(spotList)
+    private val floorList = getParkingFloorList(3)
+    private val parkingFloorList = ParkingFloorList(floorList)
     private val feeCalculator = FeeCalculator()
     private val idGenerator = IDGenerator()
-    private val parkingLot = ParkingLot(parkingSpotList, feeCalculator, idGenerator)
+    private val parkingLot = ParkingLot(parkingFloorList, feeCalculator, idGenerator)
 
-    private fun getParkingSpotList(vehicleSpotCapacity: Map<VehicleType, Int>): ArrayList<ParkingSpot> {
+    private fun getParkingFloorList(floorCount: Int): ArrayList<Floor> {
+        val floorList = arrayListOf<Floor>()
+
+        for (floorNumber in 1..floorCount) {
+            val availableSpotList = getParkingSpotList(vehicleSpotCapacity, floorNumber)
+            val floor = Floor(floorNumber, availableSpotList)
+
+            floorList.add(floor)
+        }
+        return floorList
+    }
+
+    private fun getParkingSpotList(
+        vehicleSpotCapacity: Map<VehicleType, Int>,
+        floorNumber: Int
+    ): ArrayList<ParkingSpot> {
         val spots = arrayListOf<ParkingSpot>()
 
         for (entry in vehicleSpotCapacity.entries.iterator()) {
             for (i in 1..entry.value) {
-                spots.add(ParkingSpot(i, entry.key))
+                spots.add(ParkingSpot(i, entry.key, floorNumber))
             }
         }
         return spots
